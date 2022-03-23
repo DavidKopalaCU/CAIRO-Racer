@@ -1,0 +1,8 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/deepracer_description/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages",
+        "/home/davidkopala/.ros/webotsR2022a/webots/lib/controller/python38"
+    ],
+    "cmake.configureOnOpen": false
+}

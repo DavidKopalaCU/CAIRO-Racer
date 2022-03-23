@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<robot>
+    <webots>
+        <plugin type="deepracer_webots.my_robot_driver.MyRobotDriver" />
+    </webots>
+</robot>
