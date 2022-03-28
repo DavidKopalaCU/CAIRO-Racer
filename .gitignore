@@ -263,3 +263,7 @@ AMENT_IGNORE
 # Support for Project snippet scope
 
 # End of https://www.toptal.com/developers/gitignore/api/ros2,ros,python,cmake,visualstudiocode
+
+
+# Auto-generated and log files that we are making
+*.urdf.xml

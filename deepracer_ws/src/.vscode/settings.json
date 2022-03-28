@@ -4,5 +4,10 @@
         "/opt/ros/foxy/lib/python3.8/site-packages",
         "/home/davidkopala/.ros/webotsR2022a/webots/lib/controller/python38"
     ],
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "python.analysis.extraPaths": [
+        // "C:\\Program Files\\Webots\\lib\\controller\\python39",
+        // "./webots_ros2_utils"
+        "../install/webots_ros2_utils/lib/python3.8/site-packages"
+    ]
 }

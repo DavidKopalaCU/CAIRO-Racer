@@ -1,0 +1,6 @@
+# Adapted from cyberbotics/webots_ros2 develop branch
+# https://github.com/cyberbotics/webots_ros2/blob/develop/webots_ros2_msgs/srv/SpawnUrdfRobot.srv
+
+UrdfRobot robot
+---
+bool success
