@@ -7,6 +7,7 @@ data_files = [
     (f'share/{ package_name }/launch', ['launch/deepracer_webots.launch.py']),
     (f'share/{ package_name }/worlds', ['worlds/tutorial_world.wbt']),
     (f'share/{ package_name }/resource', ['resource/robot.urdf']),
+    (f'share/{ package_name }/protos', ['protos/Agent.proto']),
     (f'share/{ package_name }', ['package.xml'])
 ]
 

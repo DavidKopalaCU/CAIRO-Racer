@@ -1,0 +1,574 @@
+#VRML_SIM R2022a utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the Agent
+# Extracted from: /mnt/d/DeepRacer/CAIRORacer/deepracer-1651431309.urdf
+
+PROTO Agent [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "Agent"  # Is `Robot.name`.
+  field  SFString    controller      "void"   # Is `Robot.controller`.
+  field  MFString    controllerArgs  []       # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""       # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE    # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE     # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE    # Is `Robot.selfCollision`.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+      Solid {
+        translation 0.000000 0.000000 0.023249
+        rotation 0.000000 0.000000 1.000000 0.000000
+        children [
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 1.000000 0.000000
+              anchor -0.081663 0.081050 0.015750
+              dampingConstant 0.0
+              staticFriction 0.0
+            }
+            device [
+              RotationalMotor {
+                name "left_rear_wheel_joint"
+                maxVelocity 100.0
+                minPosition -1.0
+                maxPosition 1.0
+                maxTorque 10.0
+              }
+              PositionSensor {
+                name "left_rear_wheel_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation -0.081663 0.081050 0.015750
+              rotation 0.000000 0.000000 1.000000 0.000000
+              children [
+                Transform {
+                  translation 0.000000 0.000000 0.000000
+                  rotation -0.577313 0.577369 0.577369 2.094284
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.500000 0.500000 0.500000
+                        transparency 0.000000
+                        roughness 1.000000
+                        metalness 0
+                        emissiveColor 0.000000 0.000000 0.000000
+                      }
+                      geometry Cylinder {
+                        radius 0.03
+                        height 0.025
+                      }
+                    }
+                  ]
+                }
+              ]
+              name "left_rear_wheel"
+              boundingObject Transform {
+                translation 0.000000 0.000000 0.000000
+                rotation -0.577313 0.577369 0.577369 2.094284
+                children [
+                  Cylinder {
+                    radius 0.03
+                    height 0.025
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 0.042222
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  9.446060e-05 6.117710e-05 6.117710e-05
+                  -2.083948e-20 -3.206093e-09 7.972411e-21
+                ]
+              }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 1.000000 0.000000
+              anchor -0.081663 -0.081050 0.015750
+              dampingConstant 0.0
+              staticFriction 0.0
+            }
+            device [
+              RotationalMotor {
+                name "right_rear_wheel_joint"
+                maxVelocity 100.0
+                minPosition -1.0
+                maxPosition 1.0
+                maxTorque 10.0
+              }
+              PositionSensor {
+                name "right_rear_wheel_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation -0.081663 -0.081050 0.015750
+              rotation 0.000000 0.000000 1.000000 0.000000
+              children [
+                Transform {
+                  translation 0.000000 0.000000 0.000000
+                  rotation -0.577313 0.577369 0.577369 2.094284
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.500000 0.500000 0.500000
+                        transparency 0.000000
+                        roughness 1.000000
+                        metalness 0
+                        emissiveColor 0.000000 0.000000 0.000000
+                      }
+                      geometry Cylinder {
+                        radius 0.03
+                        height 0.025
+                      }
+                    }
+                  ]
+                }
+              ]
+              name "right_rear_wheel"
+              boundingObject Transform {
+                translation 0.000000 0.000000 0.000000
+                rotation -0.577313 0.577369 0.577369 2.094284
+                children [
+                  Cylinder {
+                    radius 0.03
+                    height 0.025
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 0.042222
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  9.446060e-05 6.117710e-05 6.117710e-05
+                  -2.083948e-20 -3.206093e-09 7.972411e-21
+                ]
+              }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 0.000000 1.000000
+              anchor 0.082311 0.079601 0.011759
+              dampingConstant 0.0
+              staticFriction 0.0
+            }
+            device [
+              RotationalMotor {
+                name "left_steering_hinge_joint"
+                maxVelocity 100.0
+                minPosition -1.0
+                maxPosition 1.0
+                maxTorque 10.0
+              }
+              PositionSensor {
+                name "left_steering_hinge_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation 0.082311 0.079601 0.011759
+              rotation 0.000000 0.000000 1.000000 0.000000
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    transparency 0.000000
+                    roughness 1.000000
+                    metalness 0
+                    emissiveColor 0.000000 0.000000 0.000000
+                  }
+                  geometry DEF left_steering_hinge Mesh {
+                    url "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/deepracer_description/share/deepracer_description/meshes/left_steering_hinge.STL"
+                  }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.000000 1.000000 0.000000
+                    anchor 0.000000 0.000000 0.000000
+                    dampingConstant 0.0
+                    staticFriction 0.0
+                  }
+                  device [
+                    RotationalMotor {
+                      name "left_front_wheel_joint"
+                      maxVelocity 100.0
+                      minPosition -1.0
+                      maxPosition 1.0
+                      maxTorque 10.0
+                    }
+                    PositionSensor {
+                      name "left_front_wheel_joint_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0.000000 0.000000 0.000000
+                    rotation 0.000000 0.000000 1.000000 0.000000
+                    children [
+                      Transform {
+                        translation 0.000000 0.000000 0.000000
+                        rotation -0.577313 0.577369 0.577369 2.094284
+                        children [
+                          Shape {
+                            appearance PBRAppearance {
+                              baseColor 0.500000 0.500000 0.500000
+                              transparency 0.000000
+                              roughness 1.000000
+                              metalness 0
+                              emissiveColor 0.000000 0.000000 0.000000
+                            }
+                            geometry Cylinder {
+                              radius 0.03
+                              height 0.025
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                    name "left_front_wheel"
+                    boundingObject Transform {
+                      translation 0.000000 0.000000 0.000000
+                      rotation -0.577313 0.577369 0.577369 2.094284
+                      children [
+                        Cylinder {
+                          radius 0.03
+                          height 0.025
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.042222
+                      centerOfMass [ 0.000000 0.000000 0.000000 ]
+                      inertiaMatrix [
+                        9.446060e-05 6.117710e-05 6.117710e-05
+                        -2.083948e-20 -3.206093e-09 7.972411e-21
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "left_steering_hinge"
+              physics Physics {
+                density -1
+                mass 0.050000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  4.000000e-06 4.000000e-06 4.000000e-06
+                  0.000000e+00 0.000000e+00 0.000000e+00
+                ]
+              }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 0.000000 1.000000
+              anchor 0.082311 -0.079601 0.011759
+              dampingConstant 0.0
+              staticFriction 0.0
+            }
+            device [
+              RotationalMotor {
+                name "right_steering_hinge_joint"
+                maxVelocity 100.0
+                minPosition -1.0
+                maxPosition 1.0
+                maxTorque 10.0
+              }
+              PositionSensor {
+                name "right_steering_hinge_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation 0.082311 -0.079601 0.011759
+              rotation 0.000000 0.000000 1.000000 0.000000
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    transparency 0.000000
+                    roughness 1.000000
+                    metalness 0
+                    emissiveColor 0.000000 0.000000 0.000000
+                  }
+                  geometry DEF right_steering_hinge Mesh {
+                    url "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/deepracer_description/share/deepracer_description/meshes/right_steering_hinge.STL"
+                  }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.000000 1.000000 0.000000
+                    anchor 0.000000 0.000000 0.000000
+                    dampingConstant 0.0
+                    staticFriction 0.0
+                  }
+                  device [
+                    RotationalMotor {
+                      name "right_front_wheel_joint"
+                      maxVelocity 100.0
+                      minPosition -1.0
+                      maxPosition 1.0
+                      maxTorque 10.0
+                    }
+                    PositionSensor {
+                      name "right_front_wheel_joint_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0.000000 0.000000 0.000000
+                    rotation 0.000000 0.000000 1.000000 0.000000
+                    children [
+                      Transform {
+                        translation 0.000000 0.000000 0.000000
+                        rotation -0.577313 0.577369 0.577369 2.094284
+                        children [
+                          Shape {
+                            appearance PBRAppearance {
+                              baseColor 0.500000 0.500000 0.500000
+                              transparency 0.000000
+                              roughness 1.000000
+                              metalness 0
+                              emissiveColor 0.000000 0.000000 0.000000
+                            }
+                            geometry Cylinder {
+                              radius 0.03
+                              height 0.025
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                    name "right_front_wheel"
+                    boundingObject Transform {
+                      translation 0.000000 0.000000 0.000000
+                      rotation -0.577313 0.577369 0.577369 2.094284
+                      children [
+                        Cylinder {
+                          radius 0.03
+                          height 0.025
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.042222
+                      centerOfMass [ 0.000000 0.000000 0.000000 ]
+                      inertiaMatrix [
+                        9.446060e-05 6.117710e-05 6.117710e-05
+                        -2.083948e-20 -3.206093e-09 7.972411e-21
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "right_steering_hinge"
+              physics Physics {
+                density -1
+                mass 0.050000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  4.000000e-06 4.000000e-06 4.000000e-06
+                  0.000000e+00 0.000000e+00 0.000000e+00
+                ]
+              }
+            }
+          }
+          Solid {
+            translation 0.091711 0.030000 0.080023
+            rotation 0.000000 1.000000 0.000000 0.261800
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  transparency 0.000000
+                  roughness 1.000000
+                  metalness 0
+                  emissiveColor 0.000000 0.000000 0.000000
+                }
+                geometry DEF zed_camera_link_leftcam Mesh {
+                  url "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/deepracer_description/share/deepracer_description/meshes/zed_camera_link_leftcam.STL"
+                }
+              }
+              Solid {
+                translation 0.044755 0.000000 0.040000
+                rotation 0.000000 0.000000 1.000000 0.000000
+                children [
+                  Camera {
+                    name "zed_camera_left_sensor"
+                    fieldOfView 1.130000
+                    width 640
+                    height 480
+                  }
+                ]
+                name "camera_link_leftcam"
+                physics Physics {
+                  density -1
+                  mass 0.001000
+                  centerOfMass [ 0.000500 0.000000 0.000000 ]
+                  inertiaMatrix [
+                    1.000000e-06 1.000000e-06 1.000000e-06
+                    0.000000e+00 0.000000e+00 0.000000e+00
+                  ]
+                }
+              }
+            ]
+            name "zed_camera_link_leftcam"
+            physics Physics {
+              density -1
+              mass 0.001000
+              centerOfMass [ 0.019881 0.000063 0.034966 ]
+              inertiaMatrix [
+                1.000000e-06 1.000000e-06 1.000000e-06
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+          Solid {
+            translation 0.091711 -0.030000 0.080023
+            rotation 0.000000 1.000000 0.000000 0.261800
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  transparency 0.000000
+                  roughness 1.000000
+                  metalness 0
+                  emissiveColor 0.000000 0.000000 0.000000
+                }
+                geometry DEF zed_camera_link_rightcam Mesh {
+                  url "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/deepracer_description/share/deepracer_description/meshes/zed_camera_link_rightcam.STL"
+                }
+              }
+              Solid {
+                translation 0.044755 0.000000 0.040000
+                rotation 0.000000 0.000000 1.000000 0.000000
+                children [
+                  Camera {
+                    name "zed_camera_right_sensor"
+                    fieldOfView 1.130000
+                    width 640
+                    height 480
+                  }
+                ]
+                name "camera_link_rightcam"
+                physics Physics {
+                  density -1
+                  mass 0.001000
+                  centerOfMass [ 0.000500 0.000000 0.000000 ]
+                  inertiaMatrix [
+                    1.000000e-06 1.000000e-06 1.000000e-06
+                    0.000000e+00 0.000000e+00 0.000000e+00
+                  ]
+                }
+              }
+            ]
+            name "zed_camera_link_rightcam"
+            physics Physics {
+              density -1
+              mass 0.001000
+              centerOfMass [ 0.019881 0.000063 0.034966 ]
+              inertiaMatrix [
+                1.000000e-06 1.000000e-06 1.000000e-06
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+          Solid {
+            translation 0.029130 0.000000 0.161450
+            rotation -0.000000 0.000000 1.000000 3.141600
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  transparency 0.000000
+                  roughness 1.000000
+                  metalness 0
+                  emissiveColor 0.000000 0.000000 0.000000
+                }
+                geometry DEF laser Mesh {
+                  url "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/deepracer_description/share/deepracer_description/meshes/laser.STL"
+                }
+              }
+              Lidar {
+                name "hokuyo_sensor"
+                fieldOfView 5.235980
+                horizontalResolution 600
+                numberOfLayers 1
+                minRange 0.150000
+                maxRange 10.000000
+                noise 0.001000
+                resolution 0.010000
+                near 0.1
+              }
+            ]
+            name "laser"
+            boundingObject USE laser
+            physics Physics {
+              density -1
+              mass 0.000010
+              centerOfMass [ 0.006099 0.000284 -0.012654 ]
+              inertiaMatrix [
+                1.000000e-06 1.000000e-06 1.000000e-06
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+          Solid {
+            translation -0.076200 0.000000 0.000020
+            rotation 0.000000 0.000000 1.000000 0.000000
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  transparency 0.000000
+                  roughness 1.000000
+                  metalness 0
+                  emissiveColor 0.000000 0.000000 0.000000
+                }
+                geometry DEF deepracer Mesh {
+                  url "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/deepracer_description/share/deepracer_description/meshes/deepracer.STL"
+                }
+              }
+            ]
+            name "shell"
+            boundingObject USE deepracer
+            physics Physics {
+              density -1
+              mass 0.000000
+              centerOfMass [ 0.000000 0.000000 0.000000 ]
+            }
+          }
+        ]
+        name "chassis"
+        physics Physics {
+          density -1
+          mass 1.906800
+          centerOfMass [ 0.000000 0.000000 0.000000 ]
+          inertiaMatrix [
+            4.151895e-03 1.037974e-02 1.037974e-02
+            0.000000e+00 0.000000e+00 0.000000e+00
+          ]
+        }
+      }
+    ]
+    name IS name
+    physics Physics {
+      density -1
+      mass 0.000010
+      centerOfMass [ 0.000000 0.000000 0.000000 ]
+    }
+  }
+}

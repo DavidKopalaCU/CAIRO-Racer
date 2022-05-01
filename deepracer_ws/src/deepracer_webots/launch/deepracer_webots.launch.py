@@ -7,9 +7,9 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions.path_join_substitution import PathJoinSubstitution
 from ament_index_python.packages import get_package_share_directory
-# from webots_ros2_driver.webots_launcher import WebotsLauncher
-from webots_ros2_utils.urdf_spawner import URDFSpawner, get_webots_driver_node
-from webots_ros2_utils.webots_launcher import WebotsLauncher, Ros2SupervisorLauncher
+from webots_ros2_driver.webots_launcher import WebotsLauncher
+# from webots_ros2_utils.urdf_spawner import URDFSpawner, get_webots_driver_node
+# from webots_ros2_utils.webots_launcher import WebotsLauncher, Ros2SupervisorLauncher
 import xacro
 import time
 
@@ -27,11 +27,11 @@ def generate_launch_description():
     with open(f"/mnt/d/DeepRacer/CAIRORacer/deepracer-{time.time():0.0f}.urdf.xml", "w") as urdf_file:
         urdf_file.write(deepracer_description)
 
-    spawn_deepracer_robot = URDFSpawner(
-        name='deepracer',
-        robot_description=deepracer_description,
-        # shell=True
-    )
+    # spawn_deepracer_robot = URDFSpawner(
+    #     name='deepracer',
+    #     robot_description=deepracer_description,
+    #     # shell=True
+    # )
 
     webots = WebotsLauncher(
         world=os.path.join(package_dir, 'worlds', 'tutorial_world.wbt')
@@ -46,18 +46,18 @@ def generate_launch_description():
         ]
     )
 
-    ros2_supervisor = Ros2SupervisorLauncher(output='log', respawn=False)
+    # ros2_supervisor = Ros2SupervisorLauncher(output='log', respawn=False)
 
-    def test_handler(event, next_action):
-        print('Test Handler!')
-        print(event)
-        return next_action
+    # def test_handler(event, next_action):
+    #     print('Test Handler!')
+    #     print(event)
+    #     return next_action
 
-    e = launch.events.execution_complete.ExecutionComplete
+    # e = launch.events.execution_complete.ExecutionComplete
 
     return LaunchDescription([
         webots,
-        ros2_supervisor,
+        # ros2_supervisor,
 
         # launch.actions.RegisterEventHandler(
         #     event_handler=launch.event_handlers.OnProcessStart(
@@ -66,7 +66,7 @@ def generate_launch_description():
         #     )
         # ),
 
-        spawn_deepracer_robot,
+        # spawn_deepracer_robot,
         my_robot_driver
 
         # launch.actions.RegisterEventHandler(
