@@ -1,0 +1,3 @@
+[submodule "deepracer_ws/aws-deepracer-interfaces-pkg"]
+	path = deepracer_ws/aws-deepracer-interfaces-pkg
+	url = https://github.com/aws-deepracer/aws-deepracer-interfaces-pkg
