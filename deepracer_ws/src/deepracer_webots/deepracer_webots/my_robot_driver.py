@@ -6,12 +6,6 @@ class MyRobotDriver:
     def init(self, webots_node, properties) -> None:
         self.__robot = webots_node.robot
 
-        # self.__device_count = self.__robot.getNumberOfDevices()
-        # for idx in range(self.__device_count):
-        #     device = self.__robot.getDeviceByIndex(idx)
-
-        #     print(f'\t{idx:02d}: {device.getName()}')
-
         self.wheel_rf = self.__robot.getDevice("right_front_wheel_joint")
         self.wheel_lf = self.__robot.getDevice("left_front_wheel_joint")
         self.wheel_rb = self.__robot.getDevice("right_rear_wheel_joint")
@@ -70,6 +64,3 @@ class MyRobotDriver:
 
             for steer in self.steering:
                 steer.setPosition(angle)
-
-        # print('step')
-

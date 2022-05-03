@@ -1,7 +1,12 @@
 {
     "python.autoComplete.extraPaths": [
-        "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/deepracer_description/lib/python3.8/site-packages",
+        "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/webots_ros2_utils/lib/python3.8/site-packages",
+        "/mnt/d/DeepRacer/CAIRORacer/deepracer_ws/install/deepracer_webots/lib/python3.8/site-packages",
         "/opt/ros/foxy/lib/python3.8/site-packages"
     ],
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "python.analysis.extraPaths": [
+        "C:\\Program Files\\Webots\\lib\\controller\\python39",
+        "./aws-deepracer-interfaces-pkg/install/deepracer_interfaces_pkg/lib/python3.8/site-packages"
+    ]
 }

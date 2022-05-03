@@ -46,6 +46,15 @@ def generate_launch_description():
         ]
     )
 
+    camera_shim = Node(
+        package='deepracer_webots',
+        executable='camera_shim',
+        output='screen',
+        parameters=[
+            { 'camera_topics': ['/Agent/zed_camera_right_sensor', '/Agent/zed_camera_left_sensor'] }
+        ]
+    )
+
     # ros2_supervisor = Ros2SupervisorLauncher(output='log', respawn=False)
 
     # def test_handler(event, next_action):
@@ -67,7 +76,8 @@ def generate_launch_description():
         # ),
 
         # spawn_deepracer_robot,
-        my_robot_driver
+        my_robot_driver,
+        camera_shim
 
         # launch.actions.RegisterEventHandler(
         #     event_handler=launch.event_handlers.OnProcessIO(

@@ -26,7 +26,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'my_robot_driver = deepracer_webots.my_robot_driver:main'
+            'my_robot_driver = deepracer_webots.my_robot_driver:main',
+            'camera_shim = deepracer_webots.camera_shim:main'
         ],
     },
 )
