@@ -11,8 +11,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.30776828212761337 -0.16688806167707168 0.9367107661310868 4.21253932539843
-  position 0.9420508401366117 2.8371948489164267 1.5018992921565002
+  orientation -0.35267379707985985 0.015200290488353866 0.9356228642045595 3.1711573499281105
+  position 1.7959284918657072 0.32997881968978904 1.2889018652737287
 }
 TexturedBackground {
 }
@@ -376,9 +376,9 @@ Robot {
               children [
                 Camera {
                   name "zed_camera_left_sensor"
-                  fieldOfView 1.13
-                  width 640
-                  height 480
+                  fieldOfView 2.094
+                  width 160
+                  height 120
                 }
               ]
               name "camera_link_leftcam"
@@ -429,9 +429,9 @@ Robot {
               children [
                 Camera {
                   name "zed_camera_right_sensor"
-                  fieldOfView 1.13
-                  width 640
-                  height 480
+                  fieldOfView 2.094
+                  width 160
+                  height 120
                 }
               ]
               name "camera_link_rightcam"
@@ -479,12 +479,12 @@ Robot {
             }
             Lidar {
               name "hokuyo_sensor"
-              horizontalResolution 600
+              horizontalResolution 667
               fieldOfView 5.23598
               numberOfLayers 1
               near 0.1
               minRange 0.15
-              maxRange 10
+              maxRange 12
               noise 0.001
               resolution 0.01
             }

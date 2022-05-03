@@ -34,10 +34,10 @@ class MyRobotDriver:
         self.cameras = [self.camera_left, self.camera_right]
 
         for camera in self.cameras:
-            camera.enable(100)
+            camera.enable(1000 // 15)
 
         self.lidar = self.__robot.getDevice("hokuyo_sensor")
-        self.lidar.enable(100)
+        self.lidar.enable(1000 // 10)
         self.lidar.enablePointCloud()
 
         self.__target_twist = None
