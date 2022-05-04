@@ -18,6 +18,7 @@ def generate_launch_description():
     package_dir = get_package_share_directory('deepracer_webots')
     description_dir = get_package_share_directory('deepracer_description')
 
+    default_rviz_config_path = os.path.join(description_dir, 'rviz', 'urdf_config.rviz')
     robot_description = pathlib.Path(os.path.join(package_dir, 'resource', 'robot.urdf')).read_text()
 
     xacro_path = os.path.join(description_dir, 'models', 'xacro', 'deepracer.xacro')
@@ -55,6 +56,47 @@ def generate_launch_description():
         ]
     )
 
+    robot_state_publisher_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        parameters=[{ 'robot_description': deepracer_description}]
+    )
+
+    joint_state_publisher_node = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+    )
+
+    static_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='odom_frame_publisher',
+        output='log',
+        arguments=['0', '0', '0.023249', '0', '0', '0', 'odom', 'map']
+    )
+
+    # robot_localization_node = Node(
+    #     package='robot_localization',
+    #     executable='ekf_node',
+    #     output='screen',
+    #     parameters=[os.path.join(package_dir, 'config/ekf.yaml'), { 'use_sim_time': False }]
+    # )
+
+    robot_localization_node = Node(
+        package='deepracer_webots',
+        executable='odom_tf_broadcaster',
+        output='screen'
+    )
+    
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', LaunchConfiguration('rvizconfig')]
+    )
+
     # ros2_supervisor = Ros2SupervisorLauncher(output='log', respawn=False)
 
     # def test_handler(event, next_action):
@@ -65,6 +107,9 @@ def generate_launch_description():
     # e = launch.events.execution_complete.ExecutionComplete
 
     return LaunchDescription([
+        DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
+                                description='Absolute path to rviz config file'),
+
         webots,
         # ros2_supervisor,
 
@@ -77,7 +122,12 @@ def generate_launch_description():
 
         # spawn_deepracer_robot,
         my_robot_driver,
-        camera_shim
+        camera_shim,
+        static_tf,
+        joint_state_publisher_node,
+        robot_state_publisher_node,
+        robot_localization_node,
+        rviz_node
 
         # launch.actions.RegisterEventHandler(
         #     event_handler=launch.event_handlers.OnProcessIO(

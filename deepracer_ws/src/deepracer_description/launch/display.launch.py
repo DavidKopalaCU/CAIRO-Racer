@@ -19,6 +19,7 @@ def generate_launch_description():
     deepracer_description: str = xacro.process_file(default_urdf_model_path).toxml()
     deepracer_description = deepracer_description.replace("package://meshes", "package://deepracer_description/meshes")
 
+
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -58,5 +59,5 @@ def generate_launch_description():
         joint_state_publisher_node,
         joint_state_publisher_gui_node,
         robot_state_publisher_node,
-        rviz_node
+        rviz_node,
     ])
