@@ -38,7 +38,7 @@ set(dependencies
 #   tf2
 )
 
-install(DIRECTORY models meshes rviz
+install(DIRECTORY models meshes rviz launch
   DESTINATION share/${PROJECT_NAME}
 )
 
