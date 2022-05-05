@@ -3,7 +3,8 @@ import pathlib
 import launch
 from launch_ros.actions import Node
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions.path_join_substitution import PathJoinSubstitution
 from ament_index_python.packages import get_package_share_directory
@@ -24,6 +25,8 @@ def generate_launch_description():
     xacro_path = os.path.join(description_dir, 'models', 'xacro', 'deepracer.xacro')
     deepracer_description: str = xacro.process_file(xacro_path).toxml()
     deepracer_description = deepracer_description.replace("package://meshes", "package://deepracer_description/meshes")
+
+    slam_toolbox_config_file = os.path.join(package_dir, 'config', 'slam_toolbox.yaml')
 
     with open(f"/mnt/d/DeepRacer/CAIRORacer/deepracer-{time.time():0.0f}.urdf.xml", "w") as urdf_file:
         urdf_file.write(deepracer_description)
@@ -56,6 +59,12 @@ def generate_launch_description():
         ]
     )
 
+    laserscan_shim = Node(
+        package='deepracer_webots',
+        executable='laserscan_shim',
+        output='screen'
+    )
+
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -68,13 +77,13 @@ def generate_launch_description():
         name='joint_state_publisher',
     )
 
-    static_tf = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='odom_frame_publisher',
-        output='log',
-        arguments=['0', '0', '0.023249', '0', '0', '0', 'odom', 'map']
-    )
+    # static_tf = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     name='odom_frame_publisher',
+    #     output='log',
+    #     arguments=['0', '0', '0.023249', '0', '0', '0', 'odom', 'map']
+    # )
 
     # robot_localization_node = Node(
     #     package='robot_localization',
@@ -87,6 +96,14 @@ def generate_launch_description():
         package='deepracer_webots',
         executable='odom_tf_broadcaster',
         output='screen'
+    )
+
+    slam_toolbox = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(get_package_share_directory('slam_toolbox'), 'launch'),
+            '/online_async_launch.py'
+        ]),
+        launch_arguments={ 'params_file': slam_toolbox_config_file }.items(),
     )
     
     rviz_node = Node(
@@ -123,10 +140,12 @@ def generate_launch_description():
         # spawn_deepracer_robot,
         my_robot_driver,
         camera_shim,
-        static_tf,
+        laserscan_shim,
+        # static_tf,
         joint_state_publisher_node,
         robot_state_publisher_node,
         robot_localization_node,
+        slam_toolbox,
         rviz_node
 
         # launch.actions.RegisterEventHandler(

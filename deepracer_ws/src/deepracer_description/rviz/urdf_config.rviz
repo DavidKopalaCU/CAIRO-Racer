@@ -8,6 +8,7 @@ Panels:
         - /Status1
         - /RobotModel1/Links1
         - /TF1
+        - /LaserScan
       Splitter Ratio: 0.5
     Tree Height: 557
 Visualization Manager:
@@ -37,6 +38,43 @@ Visualization Manager:
       Show Arrows: true
       Show Axes: true
       Show Names: true
+    - Class: rviz_default_plugins/LaserScan
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /Agent/hokuyo_sensor
+      Enabled: true
+      Name: LaserScan
+      Style: Spheres
+    - Class: rviz_default_plugins/PointCloud2
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /Agent/hokuyo_sensor/point_cloud
+      Enabled: false
+      Name: PointCloud2
+      Style: Spheres
+    - Class: rviz_default_plugins/Map
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map
+      Update Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map_updates
+      Enabled: True
+      Name: Map
+      Alpha: 0.7
+
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48

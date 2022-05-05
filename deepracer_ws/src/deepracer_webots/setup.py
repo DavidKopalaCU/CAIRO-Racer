@@ -8,7 +8,7 @@ data_files = [
     (f'share/{ package_name }/worlds', ['worlds/tutorial_world.wbt']),
     (f'share/{ package_name }/resource', ['resource/robot.urdf']),
     (f'share/{ package_name }/protos', ['protos/Agent.proto']),
-    (f'share/{ package_name }/config', ['config/ekf.yaml']),
+    (f'share/{ package_name }/config', ['config/ekf.yaml', 'config/slam_toolbox.yaml']),
     (f'share/{ package_name }', ['package.xml'])
 ]
 
@@ -29,7 +29,8 @@ setup(
         'console_scripts': [
             'my_robot_driver = deepracer_webots.my_robot_driver:main',
             'camera_shim = deepracer_webots.camera_shim:main',
-            'odom_tf_broadcaster = deepracer_webots.odom_tf_broadcaster:main'
+            'odom_tf_broadcaster = deepracer_webots.odom_tf_broadcaster:main',
+            'laserscan_shim = deepracer_webots.laserscan_shim:main'
         ],
     },
 )
