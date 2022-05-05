@@ -22,10 +22,10 @@ def quaternion_from_euler(roll, pitch, yaw):
     sr = math.sin(roll * 0.5)
 
     q = [0] * 4
-    q[0] = cy * cp * cr + sy * sp * sr
-    q[1] = cy * cp * sr - sy * sp * cr
-    q[2] = sy * cp * sr + cy * sp * cr
-    q[3] = sy * cp * cr - cy * sp * sr
+    q[3] = cy * cp * cr + sy * sp * sr
+    q[0] = cy * cp * sr - sy * sp * cr
+    q[1] = sy * cp * sr + cy * sp * cr
+    q[2] = sy * cp * cr - cy * sp * sr
 
     return q
 
@@ -44,6 +44,8 @@ class MyRobotDriver:
         for wheel in self.wheels:
             wheel.setPosition(math.inf)
             wheel.setVelocity(0)
+            wheel.setAcceleration(math.inf)
+            wheel.setAvailableTorque(10)
 
         self.steer_left = self.__robot.getDevice('left_steering_hinge_joint')
         self.steer_right = self.__robot.getDevice('right_steering_hinge_joint')
@@ -53,7 +55,7 @@ class MyRobotDriver:
         # Use position control
         for steer in self.steering:
             steer.setPosition(0)
-            steer.setVelocity(2)
+            steer.setVelocity(100)
 
         self.camera_left = self.__robot.getDevice("zed_camera_left_sensor")
         self.camera_right = self.__robot.getDevice("zed_camera_right_sensor")
@@ -75,17 +77,30 @@ class MyRobotDriver:
         self.__node = rclpy.create_node('my_robot_driver')
         self.__node.get_logger().info('started my_robot_driver node')
         self.__odom_pub = self.__node.create_publisher(Odometry, '/odom', 1)
-        self.__timer = self.__node.create_timer(0.1, self.timer_cb)
+        # self.__timer = self.__node.create_timer(0.1, self.timer_cb)
         self.__node.create_subscription(Twist, 'cmd_vel', self.__cmd_vel_callback, 1)
 
     def __cmd_vel_callback(self, twist: Twist):
         self.__target_twist = twist
 
-    def timer_cb(self):
+    def update_odom(self, dtime):
+        # target_twsist.linear.x is in rad/s
+        #   / (2 * pi) -> rotations / second
+        #   * diameter -> meters / s
+        #   * period -> meters
+        scale = (1 / (2 * math.pi)) * (2 * math.pi * 0.03) * dtime * 0.6
+        
+        # Pull the speed and angle from the twist
+        speed = self.__target_twist.linear.x
+        angle = self.__target_twist.angular.y
+        
+        # Clip the speed and the angle
+        speed = max(-100, min(100, speed))
+        angle = max(-1, min(1, angle))
         self.__state = [
-            self.__state[0] + 0.1 * (self.__target_twist.linear.x * math.cos(self.__state[2])),
-            self.__state[1] + 0.1 * (self.__target_twist.linear.x * math.sin(self.__state[2])),
-            self.__state[2] + 0.1 * (self.__target_twist.linear.x / 0.16 * math.tan(self.__target_twist.angular.z))
+            self.__state[0] + scale * (speed * math.cos(self.__state[2])),
+            self.__state[1] + scale * (speed * math.sin(self.__state[2])),
+            self.__state[2] + scale * (speed / 0.16 * math.tan(angle))
         ]
 
         odom_msg = Odometry()
@@ -111,6 +126,8 @@ class MyRobotDriver:
 
     def step(self):
         rclpy.spin_once(self.__node, timeout_sec=0)
+
+        self.update_odom(self.__robot.getBasicTimeStep() / 1000)
 
         if self.__target_twist is not None:
             speed = self.__target_twist.linear.x
